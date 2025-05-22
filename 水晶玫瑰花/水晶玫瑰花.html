@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>水晶玫瑰花</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      background: black;
+      overflow: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: url('星星.jpg') repeat;
+      animation: starScroll 100s linear infinite;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    @keyframes starScroll {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: -10000px 5000px;
+      }
+    }
+
+    .intro,
+    .banner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1;
+      transition: opacity 1.5s ease;
+    }
+
+    .intro {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .intro h1 {
+      font-size: 3.5em;
+      margin-bottom: 10px;
+      color: transparent;
+      background-image: linear-gradient(45deg, #9ad9ff, #d3f2ff, #b6ccff, #e0f8ff);
+      background-size: 300% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: textShine 5s linear infinite;
+    }
+
+    .intro p {
+      font-size: 1.25em;
+      color:  #8ac6f2;
+      margin-top: 0;
+      margin-bottom: 30px;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    @keyframes textShine {
+      0% {
+        background-position: 0% center;
+      }
+
+      100% {
+        background-position: 300% center;
+      }
+    }
+
+    .intro button {
+      font-size: 1.5em;
+      padding: 12px 40px;
+      background: linear-gradient(135deg, #6f9eff, #a9bfff);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(150, 200, 255, 0.6);
+    }
+
+    .intro button:hover {
+      background: linear-gradient(135deg, #b0e0ff, #d3f2ff);
+      box-shadow: 0 0 35px rgba(200, 240, 255, 0.9);
+      transform: scale(1.05);
+    }
+
+    .banner {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .banner.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .banner video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .banner .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stars"></div>
+
+  <!-- Intro inicial -->
+  <div class="intro" id="intro">
+    <h1>水晶玫瑰花</h1>
+    <p>玫瑰的芬芳，是时间轻轻带来的美好祝福。</p>
+    <button id="startBtn">领取</button>
+  </div>
+
+  <!-- Contenido con video -->
+  <div class="banner" id="banner">
+    <video autoplay muted loop id="bgVideo">
+      <source src="水晶玫瑰花.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="content"></div>
+  </div>
+
+  <!-- Música oculta -->
+  <audio id="music1" loop preload="auto" controls hidden>
+    <source src="http://music.163.com/song/media/outer/url?id=1963443271.mp3" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const startBtn = document.getElementById("startBtn");
+    const intro = document.getElementById("intro");
+    const banner = document.getElementById("banner");
+    const audio = document.getElementById("music1");
+
+    startBtn.addEventListener("click", () => {
+      intro.style.opacity = 0;
+      setTimeout(() => {
+        intro.style.display = "none";
+        banner.classList.add("active");
+        audio.play();
+      }, 1500);
+    });
+  </script>
+</body>
+
+</html>
+
+
